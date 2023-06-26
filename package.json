@@ -1,0 +1,15 @@
+{
+  "name": "discord-bot-rat",
+  "version": "1.0.0",
+  "description": "A Discord Bot RAT made with discord.js ",
+  "main": "index.js",
+  "repository": "https://github.com/JustYuuto/Discord-Bot-RAT.git",
+  "author": "Yuuto <55290516+JustYuuto@users.noreply.github.com>",
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "^14.11.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.43.0"
+  }
+}

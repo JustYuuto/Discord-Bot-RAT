@@ -1,0 +1,5 @@
+{
+  "prefix": "&",
+  "guild_id": "<id of the server the bot should run>",
+  "token": "<the token of the bot>"
+}
