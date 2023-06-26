@@ -1,5 +1,6 @@
 <div align="center">
     <h1>Discord Bot RAT</h1>
+    <h3>A Discord Bot RAT made with discord.js</h3>
     <h6>A tool made by <a href="https://github.com/JustYuuto">Yuuto</a></h6>
     <a href="https://github.com/JustYuuto/Discord-Bot-RAT/issues">
         <img alt="GitHub issues" src="https://img.shields.io/github/issues/JustYuuto/Discord-Bot-RAT?style=for-the-badge">
