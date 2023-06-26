@@ -1,9 +1,9 @@
 const { Client, Events } = require('discord.js');
-const { prefix } = require('./config.json');
+const { prefix, token } = require('./config.json');
 const { execSync } = require('child_process');
 
 const client = new Client({
-
+  intents: []
 });
 
 client.on(Events.MessageCreate, async (message) => {
@@ -24,3 +24,5 @@ client.on(Events.MessageCreate, async (message) => {
     }
   }
 });
+
+client.login(token);
