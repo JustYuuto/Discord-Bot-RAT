@@ -12,27 +12,29 @@ module.exports = {
     )
     .setDMPermission(false),
 
-  async run(message, client, args, legacyMsg) {
-    !legacyMsg && message.deferReply();
-    console.log(legacyMsg ? 'reply' : 'editReply');
+  async run(interaction, client, args) {
+    const slash = !!interaction.options;
+    if (slash) interaction.deferReply();
+
     try {
-      const command = await execSync(legacyMsg ? args.join(' ') : args.getString('command'));
-      console.log(command.length);
+      const commandString = !slash ? args.join(' ') : args.getString('command');
+      const command = await execSync(commandString);
+
       if (command && command.length > 0 && command.length < 2000) {
-        await message[legacyMsg ? 'reply' : 'editReply']({
+        await interaction[!slash ? 'reply' : 'editReply']({
           content: `\`\`\`${command.toString().trim()}\`\`\``
         });
       } else if (command && command.length >= 2000) {
-        await message[legacyMsg ? 'reply' : 'editReply']({
+        await interaction[!slash ? 'reply' : 'editReply']({
           files: [
             new AttachmentBuilder(command, { name: 'output.txt' })
           ]
         });
       } else {
-        legacyMsg ? await message.react('✅') : await message.editReply({ content: '✅' });
+        !slash ? await interaction.react('✅') : await interaction.editReply({ content: '✅' });
       }
     } catch (e) {
-      await message[legacyMsg ? 'reply' : 'editReply']({
+      await interaction[!slash ? 'reply' : 'editReply']({
         content: `\`\`\`${e.message}\`\`\``, ephemeral: true
       });
     }
