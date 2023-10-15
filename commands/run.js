@@ -14,7 +14,7 @@ module.exports = {
 
   async run(interaction, client, args) {
     const slash = !!interaction.options;
-    if (slash) interaction.deferReply();
+    if (slash) await interaction.deferReply();
 
     try {
       const commandString = !slash ? args.join(' ') : args.getString('command');
