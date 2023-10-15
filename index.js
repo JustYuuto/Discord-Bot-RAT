@@ -1,28 +1,31 @@
-const { Client, Events } = require('discord.js');
-const { prefix, token } = require('./config.json');
-const { execSync } = require('child_process');
+const { Client, Collection, GatewayIntentBits } = require('discord.js');
+const { readdirSync } = require('fs');
+const { resolve } = require('path');
+require('dotenv').config();
 
 const client = new Client({
-  intents: []
+  intents: [
+    GatewayIntentBits.MessageContent
+  ]
+});
+client.commands = new Collection();
+
+const events = readdirSync(resolve('events')).filter(f => f.endsWith('.js'));
+events.forEach((event) => {
+  const file = require(resolve('events', event));
+  client.on(file.name, async (...args) => file.run(...args, client));
 });
 
-client.on(Events.MessageCreate, async (message) => {
-  if (message.author.bot || !message.content.startsWith(prefix)) return;
-  const args = message.content.slice(prefix.length).trim().split(/ +/g);
-  const command = args.shift().toLowerCase();
-
-  if (command === 'run') {
-    try {
-      await execSync(args.join(' '));
-      await message.reply({
-        content: 'The command has been successfully ran!'
-      });
-    } catch (e) {
-      await message.reply({
-        content: `An error occurred while running command: ${e.message}`
-      });
-    }
+const commands = readdirSync(resolve('commands')).filter(f => f.endsWith('.js'));
+commands.forEach((command) => {
+  const path = resolve('commands', command);
+  const file = require(path);
+  if ('data' in file && 'run' in file) {
+    client.commands.set(file.data.name, file);
+    console.log(`Loaded ${file.data.name} command`);
+  } else {
+    console.log(`[WARNING] The command at ${path} is missing a required "data" or "run" property.`);
   }
 });
 
-client.login(token);
+client.login(process.env.BOT_TOKEN);

@@ -3,13 +3,16 @@
   "version": "1.0.0",
   "description": "A Discord Bot RAT made with discord.js ",
   "main": "index.js",
-  "repository": "https://github.com/JustYuuto/Discord-Bot-RAT.git",
-  "author": "Yuuto <55290516+JustYuuto@users.noreply.github.com>",
-  "license": "MIT",
   "dependencies": {
-    "discord.js": "^14.11.0"
+    "@nut-tree/nut-js": "^3.1.2",
+    "discord.js": "^14.13.0",
+    "dotenv": "^16.3.1"
   },
   "devDependencies": {
+    "discord-api-types": "^0.37.60",
     "eslint": "^8.43.0"
-  }
+  },
+  "repository": "https://github.com/JustYuuto/Discord-Bot-RAT.git",
+  "author": "Yuuto <55290516+JustYuuto@users.noreply.github.com>",
+  "license": "MIT"
 }
