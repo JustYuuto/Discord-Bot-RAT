@@ -35,7 +35,7 @@ module.exports = {
       }
     } catch (e) {
       await interaction[!slash ? 'reply' : 'editReply']({
-        content: `\`\`\`${e.message}\`\`\``, ephemeral: true
+        content: `\`\`\`\n${e.message}\`\`\``, ephemeral: true
       });
     }
   }
